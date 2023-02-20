@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@obs-study-apps/hello-world": ["libs/hello-world/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
