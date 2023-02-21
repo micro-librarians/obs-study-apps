@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { HelloWorld } from '@obs-study-apps/hello-world';
+import { LanguageSelect } from 'language-select';
 
 const StyledPage = styled.div`
   .page {
@@ -20,7 +20,7 @@ export function Index() {
             <h1>
               <span> Hello there, </span>
               Welcome obs-study 👋
-              <HelloWorld></HelloWorld>
+              <LanguageSelect></LanguageSelect>
             </h1>
           </div>
 

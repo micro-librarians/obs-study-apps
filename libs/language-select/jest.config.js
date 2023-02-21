@@ -1,6 +1,6 @@
 /* eslint-disable */
-export default {
-  displayName: 'hello-world',
+module.exports = {
+  displayName: 'language-select',
   preset: '../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': [
@@ -9,5 +9,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/hello-world',
+  coverageDirectory: '../../coverage/libs/language-select',
 };

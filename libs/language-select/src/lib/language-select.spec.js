@@ -1,10 +1,8 @@
 import { render } from '@testing-library/react';
-
-import HelloWorld from './hello-world';
-
-describe('HelloWorld', () => {
+import LanguageSelect from './language-select';
+describe('LanguageSelect', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<HelloWorld />);
+    const { baseElement } = render(<LanguageSelect />);
     expect(baseElement).toBeTruthy();
   });
 });
