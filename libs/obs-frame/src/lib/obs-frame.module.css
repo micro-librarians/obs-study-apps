@@ -1,0 +1,11 @@
+.navigation-wrap {
+    display: flex;
+    justify-content: center;
+}
+.navigation {
+    display: flex;
+    flex-direction: row;    
+}
+.navigation-reference{ 
+    margin: 0px 10px 0px;
+}

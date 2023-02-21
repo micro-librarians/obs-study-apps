@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "language-select": ["libs/language-select/src/index.js"]
+      "language-select": ["libs/language-select/src/index.js"],
+      "obs-frame": ["libs/obs-frame/src/index.js"]
     }
   },
   "exclude": ["node_modules", "tmp"]
