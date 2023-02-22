@@ -180,7 +180,7 @@ module.exports = [
     },
   },
   {
-    urlPattern: ({ url }) => {      
+    urlPattern: ({ url }) => {
       const isSameOrigin = self.origin === url.origin
       if (isSameOrigin) return false
       return url.pathname.slice(-4) === '.zip'
@@ -198,7 +198,7 @@ module.exports = [
   {
     urlPattern: ({ url }) => {
       const isSameOrigin = self.origin === url.origin
-      if (!isSameOrigin) return false
+      if (isSameOrigin) return false
       return url.pathname.startsWith('/api/v1/catalog/search')
     },
     handler: 'NetworkFirst',
