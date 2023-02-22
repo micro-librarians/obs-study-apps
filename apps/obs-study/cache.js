@@ -167,8 +167,7 @@ module.exports = [
     },
   },
   {
-    urlPattern: ({ url }) => {      
-      self.print('log',url)
+    urlPattern: ({ url }) => {
       console.log(url)
       return url.origin === 'https://cdn.door43.org'
     },
@@ -182,8 +181,7 @@ module.exports = [
     },
   },
   {
-    urlPattern: ({ url }) => {
-      self.print('log',url)
+    urlPattern: ({ url }) => {      
       console.log(url)
       const isSameOrigin = self.origin === url.origin
       if (isSameOrigin) return false
