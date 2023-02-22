@@ -2,9 +2,12 @@
   "name": "obs-study-apps",
   "version": "0.0.0",
   "license": "MIT",
+  "description": "OBS Study App",
+  "main": "./apps/obs-study/electron/main.js",
   "scripts": {
     "glib:js": "nx g lib --publishable --buildable --js",
-    "export-obs-study": "nx export obs-study"
+    "export:obs-study": "nx export obs-study",
+    "start:electron": "electron ."
   },
   "private": true,
   "devDependencies": {
@@ -34,6 +37,7 @@
     "@typescript-eslint/parser": "^5.36.1",
     "babel-jest": "28.1.1",
     "cypress": "^12.2.0",
+    "electron": "^23.1.0",
     "eslint": "~8.15.0",
     "eslint-config-next": "13.1.1",
     "eslint-config-prettier": "8.1.0",
