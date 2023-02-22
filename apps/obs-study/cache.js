@@ -168,10 +168,9 @@ module.exports = [
   },
   {
     urlPattern: ({ url }) => {
-      console.log(url)
       return url.origin === 'https://cdn.door43.org'
     },
-    handler: 'CacheFirst',
+    handler: 'NetworkFirst',
     options: {
       cacheName: 'obs-images',
       expiration: {
@@ -182,7 +181,6 @@ module.exports = [
   },
   {
     urlPattern: ({ url }) => {      
-      console.log(url)
       const isSameOrigin = self.origin === url.origin
       if (isSameOrigin) return false
       return url.pathname.slice(-4) === '.zip'
@@ -199,12 +197,11 @@ module.exports = [
   },
   {
     urlPattern: ({ url }) => {
-      console.log( url)
       const isSameOrigin = self.origin === url.origin
       if (!isSameOrigin) return false
       return url.pathname.startsWith('/api/v1/catalog/search')
     },
-    handler: 'StaleWhileRevalidate',
+    handler: 'NetworkFirst',
     options: {
       cacheName: 'door43-api',
       expiration: {
