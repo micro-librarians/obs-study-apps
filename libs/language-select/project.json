@@ -20,9 +20,9 @@
         "tsConfig": "libs/language-select/tsconfig.lib.json",
         "project": "libs/language-select/package.json",
         "entryFile": "libs/language-select/src/index.js",
-        "external": ["@emotion/react/jsx-runtime"],
+        "external": ["react/jsx-runtime"],
         "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
-        "compiler": "swc",
+        "compiler": "babel",
         "assets": [
           {
             "glob": "libs/language-select/README.md",

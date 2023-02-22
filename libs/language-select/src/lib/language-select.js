@@ -1,12 +1,9 @@
-import { useEffect, useState, useMemo } from 'react'
-import styled from '@emotion/styled'
-import { Select, MenuItem, Button, Typography } from '@mui/material'
+import { useEffect, useState, useMemo, useCallback } from 'react'
+
+import { Autocomplete, TextField } from '@mui/material'
 import axios from 'axios'
 
-const StyledLanguageSelect = styled.div`
-  border: 1px solid;
-`
-export function LanguageSelect({selectedLanguage}) {
+export function LanguageSelect({ selectedLanguage }) {
   const [selectedResource, setSelectedResource] = useState('English')
   const [resources, setResources] = useState([])
   useEffect(() => {
@@ -30,32 +27,31 @@ export function LanguageSelect({selectedLanguage}) {
       })
   }, [])
 
-  const selectLanguage = () => {
-    selectedLanguage(resources.filter((el) => el.language_title === selectedResource)[0])
-  }
+  const setNewSelectedResource = useCallback(
+    (e, newSelectedResource) => {
+      setSelectedResource(newSelectedResource)
+      selectedLanguage(
+        resources.filter((el) => el.language_title === newSelectedResource)[0]
+      )
+    },
+    [selectedLanguage, resources]
+  )
 
   const langs = useMemo(() => {
     return Array.from(new Set(resources.map((el) => el?.language_title)))
   }, [resources])
 
   return (
-    <StyledLanguageSelect>
-      <Typography variant="h3" color="initial">
-        Language Select Component
-      </Typography>
-      <Select
-        label="Select language"
-        value={selectedResource}
-        onChange={(e) => setSelectedResource(e.target.value)}
-      >
-        {langs.map((language_title) => (
-          <MenuItem key={language_title} value={language_title}>
-            {language_title}
-          </MenuItem>
-        ))}
-      </Select>
-      <Button onClick={selectLanguage}>Select</Button>
-    </StyledLanguageSelect>
+    <Autocomplete
+      disablePortal
+      id="select-language"
+      options={langs}
+      value={selectedResource}
+      onChange={setNewSelectedResource}
+      renderInput={(params) => (
+        <TextField {...params} label="Select language" />
+      )}
+    />
   )
 }
 export default LanguageSelect
