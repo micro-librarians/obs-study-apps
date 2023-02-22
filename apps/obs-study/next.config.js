@@ -5,7 +5,7 @@ const customCache = require('./cache')
 const { withNx } = require('@nrwl/next/plugins/with-nx')
 
 const withPWA = require('next-pwa')({
-  // disable: process.env.NODE_ENV === 'development',
+  disable: process.env.NODE_ENV === 'development',
   dest: 'public',
   register: true,
   skipWaiting: true,
