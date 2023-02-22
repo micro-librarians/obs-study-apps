@@ -177,7 +177,6 @@ module.exports = [
         maxEntries: 200,
         maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
       },
-      networkTimeoutSeconds: 10,
     },
   },
   {
@@ -209,7 +208,6 @@ module.exports = [
         maxEntries: 2,
         maxAgeSeconds: 60 * 60, // 1 hour
       },
-      networkTimeoutSeconds: 10,
     },
   },
 ]
