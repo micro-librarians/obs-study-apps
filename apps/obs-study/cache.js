@@ -168,17 +168,46 @@ module.exports = [
   },
   {
     urlPattern: ({ url }) => {
-      const isSameOrigin = self.origin === url.origin
-      return !isSameOrigin
+      return url.origin === 'https://cdn.door43.org'
     },
     handler: 'NetworkFirst',
     options: {
-      cacheName: 'cross-origin',
+      cacheName: 'obs-images',
       expiration: {
-        maxEntries: 32,
-        maxAgeSeconds: 60 * 60, // 1 hour
+        maxEntries: 200,
+        maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
+      },
+    },
+  },
+  {
+    urlPattern: ({ url }) => {
+      const isSameOrigin = self.origin === url.origin
+      if (isSameOrigin) return false
+      return url.pathname.slice(-4) === '.zip'
+    },
+    handler: 'NetworkFirst',
+    options: {
+      cacheName: 'obs-zip',
+      expiration: {
+        maxEntries: 4,
+        maxAgeSeconds: 60 * 60 * 24, // 1 day
       },
       networkTimeoutSeconds: 10,
+    },
+  },
+  {
+    urlPattern: ({ url }) => {
+      const isSameOrigin = self.origin === url.origin
+      if (isSameOrigin) return false
+      return url.pathname.startsWith('/api/v1/catalog/search')
+    },
+    handler: 'NetworkFirst',
+    options: {
+      cacheName: 'door43-api',
+      expiration: {
+        maxEntries: 2,
+        maxAgeSeconds: 60 * 60, // 1 hour
+      },
     },
   },
 ]
