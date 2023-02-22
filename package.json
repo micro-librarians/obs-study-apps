@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "glib:js": "nx g lib --publishable --buildable --js"
+    "glib:js": "nx g lib --publishable --buildable --js",
+    "export-obs-study": "nx export obs-study"
   },
   "private": true,
   "devDependencies": {
