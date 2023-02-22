@@ -6,4 +6,5 @@ const mount = (el, { onLanguageSelect }) => {
   createRoot(el).render(<LanguageSelect selectedLanguage={onLanguageSelect} />)
 }
 
-export { mount, LanguageSelect }
+export { mount }
+export * from './lib/language-select'

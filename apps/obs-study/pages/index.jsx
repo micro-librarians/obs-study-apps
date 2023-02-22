@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import styled from '@emotion/styled'
-import { LanguageSelect, mount } from 'language-select'
-import { ObsFrame } from 'obs-frame'
+import { mount as mountLanguageSelect } from 'language-select'
+import { mount as mountObsFrame } from 'obs-frame'
 
 const StyledPage = styled.div`
   .page {
@@ -16,14 +16,26 @@ export function Index() {
    */
   const [url, setUrl] = useState('')
   const parseSelectedLanguage = (langObject) => {
-    setUrl(langObject.zipball_url)
+    setUrl(langObject?.zipball_url)
   }
 
   const LanguageSelectComponent = () => {
     const ref = useRef(null)
 
     useEffect(() => {
-      mount(ref.current, { onLanguageSelect: parseSelectedLanguage })
+      mountLanguageSelect(ref.current, {
+        onLanguageSelect: parseSelectedLanguage,
+      })
+    })
+
+    return <div ref={ref} />
+  }
+
+  const ObsFrameComponent = () => {
+    const ref = useRef(null)
+
+    useEffect(() => {
+      mountObsFrame(ref.current, { url })
     })
 
     return <div ref={ref} />
@@ -35,7 +47,7 @@ export function Index() {
         <div className="container">
           <div id="welcome">
             <LanguageSelectComponent />
-            <ObsFrame url={url} />
+            <ObsFrameComponent />
           </div>
         </div>
       </div>
