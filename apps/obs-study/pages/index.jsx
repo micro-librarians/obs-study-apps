@@ -9,34 +9,14 @@ const StyledPage = styled.div`
 `
 
 export function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.@emotion/styled file.
-   */
   const [url, setUrl] = useState('')
-  const parseSelectedLanguage = (langObject) => {
-    setUrl(langObject?.zipball_url)
-  }
-
-  const LanguageSelectComponent = () => {
-    const ref = useRef(null)
-
-    useEffect(() => {
-      mountLanguageSelect(ref.current, {
-        onLanguageSelect: parseSelectedLanguage,
-      })
-    })
-
-    return <div ref={ref} />
-  }
 
   const ObsFrameComponent = () => {
     const ref = useRef(null)
 
     useEffect(() => {
       mountObsFrame(ref.current, { url })
-    })
+    }, [])
 
     return <div ref={ref} />
   }
@@ -46,13 +26,26 @@ export function Index() {
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
-            <LanguageSelectComponent />
+            <MountLanguageComponent setUrl={setUrl} />
             <ObsFrameComponent />
           </div>
         </div>
       </div>
     </StyledPage>
   )
+}
+
+const MountLanguageComponent = ({setUrl}) => {
+  const ref = useRef(null)
+  useEffect(() => {
+    mountLanguageSelect(ref.current, {
+      onLanguageSelect: (langObject) => {
+        setUrl(langObject?.zipball_url)
+      },
+    })
+  }, [setUrl])
+
+  return <div ref={ref} />
 }
 
 export default Index
