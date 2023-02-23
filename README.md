@@ -24,7 +24,7 @@ First publish obs-study-apps:
 yarn export:obs-study
 ```
 
-Then in `dist/apps/obs-study/exported/index.html` need to replace `="/` with `="./` . Now you can do:
+Then in `./dist/apps/obs-study/exported/index.html` need to replace all cases of `="/` with `="./` . Then you can do:
 
 ```
 yarn start
