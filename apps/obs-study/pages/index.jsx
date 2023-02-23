@@ -9,7 +9,6 @@ const StyledPage = styled.div`
   .page {
   }
 `
-
 export function Index() {
   const {state: downloadedResources} = useDownloadedResources()
   return (
@@ -23,7 +22,7 @@ export function Index() {
             {downloadedResources &&
               downloadedResources?.map((el, index) => (
                 <div key={index}>
-                  <Link href={`/study/${el.owner}/${el.repo}/1:1`}>
+                  <Link href={`/study/${el.owner}/${el.repo}/01:01`}>
                     {`${el.repo}(${el.owner})`}
                   </Link>
                   <br />

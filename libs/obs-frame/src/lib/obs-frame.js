@@ -1,16 +1,8 @@
 import { useMemo } from 'react'
-import { Button, Select, MenuItem } from '@mui/material'
+import { Select, MenuItem } from '@mui/material'
 import styles from './obs-frame.module.css'
-import useObs from './hooks'
 
-export function ObsFrame({ url, startReference = '01:01' }) {
-  const {
-    state: { obs, reference },
-    actions: { goNext, goPrev, changeStory },
-  } = useObs({
-    _url: url ?? 'https://git.door43.org/unfoldingWord/en_obs/archive/v8.zip',
-    _reference: startReference ?? '01:01',
-  })
+export function ObsFrame({ obs, reference, changeStory }) {
 
   return (
     <div className={styles['container']}>
@@ -28,9 +20,7 @@ export function ObsFrame({ url, startReference = '01:01' }) {
             alt=""
           />
           <p>{obs[reference.story].frames[reference.frame]}</p>
-          <div className={styles['navigation-wrap']}>
-            <Navigation reference={reference} goNext={goNext} goPrev={goPrev} />
-          </div>
+
         </div>
       )}
     </div>
@@ -52,7 +42,6 @@ function Title({ obs, currentStory, changeStory }) {
         )
       }
     }
-    // titles.sort((a,b)=>a.localeCompare(b))
     titles.sort((a, b) => a.key.localeCompare(b.key))
     return titles
 
@@ -71,18 +60,4 @@ function Title({ obs, currentStory, changeStory }) {
   )
 }
 
-function Navigation({ reference, goNext, goPrev }) {
-  return (
-    <div className={styles['navigation']}>
-      <Button variant={'contained'} onClick={goPrev}>
-        {'<-'}
-      </Button>
-      <div className={styles['navigation-reference']}>
-        OBS {reference?.story}:{reference.frame}
-      </div>
-      <Button variant={'contained'} onClick={goNext}>
-        {'->'}
-      </Button>
-    </div>
-  )
-}
+

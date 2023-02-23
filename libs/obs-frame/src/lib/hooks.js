@@ -25,14 +25,15 @@ const storyParser = (md) => {
   return { frames, title, link }
 }
 
-function useObs({ _url, _reference }) {
+export function useObs({ owner, repo, _reference }) {
   const [obs, setObs] = useState(false)
   const [reference, setReference] = useState()
+  const _url = `https://git.door43.org/${owner}/${repo}/archive/master.zip`
 
   useEffect(() => {
     const main = async () => {
       const allStories = {}
-      JSZipUtils.getBinaryContent(_url, function (err, data) {
+      JSZipUtils?.getBinaryContent(_url, function (err, data) {
         if (err) {
           throw err
         }
@@ -52,10 +53,10 @@ function useObs({ _url, _reference }) {
         })
       })
     }
-    if (_url.length > 0) {
+    if (_url.length > 0 && repo && owner) {
       main()
     }
-  }, [_url])
+  }, [_url, owner, repo])
 
   useEffect(() => {
     const [story, frame] = _reference.split(':')
