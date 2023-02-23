@@ -40,4 +40,17 @@ export function Index() {
   )
 }
 
+const MountLanguageComponent = ({ setUrl }) => {
+  const ref = useRef(null)
+  useEffect(() => {
+    mountLanguageSelect(ref.current, {
+      onLanguageSelect: (langObject) => {
+        setUrl(langObject?.zipball_url)
+      },
+    })
+  }, [setUrl])
+
+  return <div ref={ref} />
+}
+
 export default Index
