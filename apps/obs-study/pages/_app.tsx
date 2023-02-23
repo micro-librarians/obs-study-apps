@@ -19,7 +19,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <main className="app">
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" sx={{ backgroundColor: '#0c1b33' }}>
-            <Toolbar>
+            <Toolbar variant="dense">
               <MenuItem>
                 <IconButton
                   size="large"
