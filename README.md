@@ -15,3 +15,17 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+
+## testing with Electron
+First publish obs-study-apps:
+
+```
+yarn export:obs-study
+```
+
+Then in `dist/apps/obs-study/exported/index.html` need to replace `="/` with `="./` . Now you can do:
+
+```
+yarn start
+```
