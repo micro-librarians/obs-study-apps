@@ -3,7 +3,6 @@ import { ObsFrame } from 'obs-frame'
 
 import styled from '@emotion/styled'
 
-
 const StyledPage = styled.div`
   .page {
   }
@@ -13,7 +12,6 @@ export function FramePage() {
   const {
     query: { owner, repo, ref },
   } = useRouter()
-
   return (
     <StyledPage>
       <div className="wrapper">
