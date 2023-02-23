@@ -1,15 +1,15 @@
 import { useEffect, useState, useMemo, useCallback } from 'react'
-
-import { Autocomplete, TextField } from '@mui/material'
 import axios from 'axios'
 
+import { Autocomplete, TextField } from '@mui/material'
+
 export function LanguageSelect({ selectedLanguage }) {
-  const [selectedResource, setSelectedResource] = useState('English')
+  const [selectedResource, setSelectedResource] = useState('Select your language')
   const [resources, setResources] = useState([])
   useEffect(() => {
     axios
       .get(
-        'https://git.door43.org/api/v1/catalog/search?sort=released&subject=Open%20Bible%20Stories'
+        'https://git.door43.org/api/v1/repos/search?sort=updated&order=desc&subject=Open%20Bible%20Stories'
       )
       .then((res) => {
         setResources(() =>
@@ -18,10 +18,10 @@ export function LanguageSelect({ selectedLanguage }) {
             language_title: el.language_title,
             language: el.language,
             name: el.name,
-            owner: el.owner,
-            branch_or_tag_name: el.branch_or_tag_name,
+            owner: el.owner.username,
+            default_branch: el.default_branch,
             title: el.title,
-            zipball_url: el.zipball_url,
+            zipball_url: `${el.html_url}/archive/master.zip`,
           }))
         )
       })
@@ -38,7 +38,7 @@ export function LanguageSelect({ selectedLanguage }) {
   )
 
   const langs = useMemo(() => {
-    return Array.from(new Set(resources.map((el) => el?.language_title)))
+    return Array.from(new Set(resources.map((el) => el?.language_title))).sort()
   }, [resources])
 
   return (

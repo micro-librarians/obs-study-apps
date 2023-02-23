@@ -1,5 +1,8 @@
+import { useRouter } from 'next/router'
+import { ObsFrame } from 'obs-frame'
+
 import styled from '@emotion/styled'
-import Link from 'next/link'
+
 
 const StyledPage = styled.div`
   .page {
@@ -7,18 +10,19 @@ const StyledPage = styled.div`
 `
 
 export function Index() {
+  const {
+    query: { owner, repo, ref },
+  } = useRouter()
+
   return (
     <StyledPage>
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
-            Downloaded resources List
-            <br />
-            <br />
-            <Link href={'/add-resource'}>Add new resource</Link>
-            <br />
-            <br />
-            <Link href={'/study/ru_gl/ru_obs/1:1'}>Go to Obs</Link>
+            <ObsFrame
+              url={`https://git.door43.org/${owner}/${repo}/archive/master.zip`}
+              ref={ref}
+            />
           </div>
         </div>
       </div>
