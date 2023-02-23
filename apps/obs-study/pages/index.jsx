@@ -1,29 +1,16 @@
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
+
 import styled from '@emotion/styled'
 import { Button } from '@mui/material'
+
+import useDownloadedResources from '../hooks/useDownloadedResources'
 
 const StyledPage = styled.div`
   .page {
   }
 `
 export function Index() {
-  const [downloadedResources, setDownloadedResources] = useState()
-  useEffect(() => {
-    const getCachedResources = async () => {
-      const cashedResources = await caches.open('obs-zip')
-      cashedResources.keys().then((res) => {
-        const downloadedResources = res.map((el) => {
-          const first = 'https://git.door43.org/'.length
-          const last = '/archive/master.zip'.length
-          const [owner, repo] = el.url.slice(first, -last).split('/')
-          return { owner, repo }
-        })
-        setDownloadedResources(downloadedResources)
-      })
-    }
-    getCachedResources()
-  }, [])
+  const {state: downloadedResources} = useDownloadedResources()
   return (
     <StyledPage>
       <div className="wrapper">

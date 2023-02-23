@@ -2,12 +2,10 @@ import { useEffect, useState, useMemo, useCallback } from 'react'
 
 import axios from 'axios'
 
-import { Autocomplete, Button, TextField } from '@mui/material'
-import Link from 'next/link'
+import { Autocomplete, TextField } from '@mui/material'
 
-export function LanguageSelect() {
+export function LanguageSelect({ onLanguageSelect }) {
   const [resources, setResources] = useState([])
-  const [listOfResources, setListOfResources] = useState([])
 
   useEffect(() => {
     axios
@@ -32,11 +30,11 @@ export function LanguageSelect() {
 
   const setNewSelectedLanguage = useCallback(
     (e, newSelectedLanguage) => {
-      setListOfResources(
+      onLanguageSelect(
         resources.filter((el) => el.language_title === newSelectedLanguage)
       )
     },
-    [resources]
+    [onLanguageSelect, resources]
   )
 
   const uniqueLanguages = useMemo(() => {
@@ -44,8 +42,7 @@ export function LanguageSelect() {
   }, [resources])
 
   return (
-    <>
-      <Autocomplete
+    <Autocomplete
         disablePortal
         options={uniqueLanguages}
         onChange={setNewSelectedLanguage}
@@ -53,30 +50,6 @@ export function LanguageSelect() {
           <TextField {...params} label="Select language" />
         )}
       />
-      <div>Select a resource:</div>
-      <ResourcesList listOfResources={listOfResources} />
-    </>
   )
 }
 export default LanguageSelect
-
-const uploadResource = (url) => {
-  axios.get(url)
-}
-
-function ResourcesList({ listOfResources }) {
-  return (
-    <div>
-      {listOfResources.map((el) => (
-        <div key={el.id}>
-          {el.title} ({el.owner.full_name})
-          <Button onClick={() => uploadResource(el.zipball_url)}>Upload</Button>
-          <Link href={`/study/${el.owner.username}/${el.name}/01:01`}>
-            <Button>Open</Button>
-          </Link>
-        </div>
-      ))}
-    </div>
-  )
-
-}
