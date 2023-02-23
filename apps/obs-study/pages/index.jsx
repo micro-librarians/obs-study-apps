@@ -33,11 +33,12 @@ export function Index() {
           <div id="welcome">
             Downloaded resources List
             <br />
+            <br />
             {downloadedResources &&
               downloadedResources?.map((el, index) => (
                 <div key={index}>
                   <Link href={`/study/${el.owner}/${el.repo}/1:1`}>
-                    {el.repo}
+                    {`${el.repo}(${el.owner})`}
                   </Link>
                   <br />
                 </div>
