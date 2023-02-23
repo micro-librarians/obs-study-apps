@@ -3,12 +3,10 @@ import Link from 'next/link'
 import styled from '@emotion/styled'
 import { Button } from '@mui/material'
 
-
 const StyledPage = styled.div`
   .page {
   }
 `
-
 export function Index() {
   const [downloadedResources, setDownloadedResources] = useState()
   useEffect(() => {
@@ -37,7 +35,7 @@ export function Index() {
             {downloadedResources &&
               downloadedResources?.map((el, index) => (
                 <div key={index}>
-                  <Link href={`/study/${el.owner}/${el.repo}/1:1`}>
+                  <Link href={`/study/${el.owner}/${el.repo}/01:01`}>
                     {`${el.repo}(${el.owner})`}
                   </Link>
                   <br />
