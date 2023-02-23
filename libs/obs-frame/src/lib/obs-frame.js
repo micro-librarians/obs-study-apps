@@ -3,15 +3,13 @@ import { Button, Select, MenuItem } from '@mui/material'
 import styles from './obs-frame.module.css'
 import useObs from './hooks'
 
-const _reference = { story: '01', frame: '01' }
-
-export function ObsFrame({ url }) {
+export function ObsFrame({ url, startReference = '01:01' }) {
   const {
     state: { obs, reference },
     actions: { goNext, goPrev, changeStory },
   } = useObs({
     _url: url ?? 'https://git.door43.org/unfoldingWord/en_obs/archive/v8.zip',
-    _reference,
+    _reference: startReference ?? '01:01',
   })
 
   return (

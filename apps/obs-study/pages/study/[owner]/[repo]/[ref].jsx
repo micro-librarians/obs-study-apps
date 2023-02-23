@@ -9,7 +9,7 @@ const StyledPage = styled.div`
   }
 `
 
-export function Index() {
+export function FramePage() {
   const {
     query: { owner, repo, ref },
   } = useRouter()
@@ -19,10 +19,12 @@ export function Index() {
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
-            <ObsFrame
-              url={`https://git.door43.org/${owner}/${repo}/archive/master.zip`}
-              ref={ref}
-            />
+            {owner && repo && (
+              <ObsFrame
+                url={`https://git.door43.org/${owner}/${repo}/archive/master.zip`}
+                startReference={ref}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -30,4 +32,4 @@ export function Index() {
   )
 }
 
-export default Index
+export default FramePage
