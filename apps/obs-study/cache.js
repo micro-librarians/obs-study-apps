@@ -189,7 +189,7 @@ module.exports = [
     options: {
       cacheName: 'obs-zip',
       expiration: {
-        maxEntries: 4,
+        maxEntries: 10,
         maxAgeSeconds: 60 * 60 * 24, // 1 day
       },
       networkTimeoutSeconds: 10,

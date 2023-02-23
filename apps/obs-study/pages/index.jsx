@@ -1,53 +1,38 @@
-import { useState, useRef, useEffect } from 'react'
+import Link from 'next/link'
+
 import styled from '@emotion/styled'
-import { mount as mountLanguageSelect } from 'language-select'
-import { mount as mountObsFrame } from 'obs-frame'
+import { Button } from '@mui/material'
+
+import useDownloadedResources from '../hooks/useDownloadedResources'
 
 const StyledPage = styled.div`
   .page {
   }
 `
-
 export function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.@emotion/styled file.
-   */
-  const [url, setUrl] = useState('')
-  const parseSelectedLanguage = (langObject) => {
-    setUrl(langObject?.zipball_url)
-  }
-
-  const LanguageSelectComponent = () => {
-    const ref = useRef(null)
-
-    useEffect(() => {
-      mountLanguageSelect(ref.current, {
-        onLanguageSelect: parseSelectedLanguage,
-      })
-    })
-
-    return <div ref={ref} />
-  }
-
-  const ObsFrameComponent = () => {
-    const ref = useRef(null)
-
-    useEffect(() => {
-      mountObsFrame(ref.current, { url })
-    })
-
-    return <div ref={ref} />
-  }
-
+  const { state: downloadedResources } = useDownloadedResources()
   return (
     <StyledPage>
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
-            <LanguageSelectComponent />
-            <ObsFrameComponent />
+            Downloaded resources List
+            <br />
+            <br />
+            {downloadedResources &&
+              downloadedResources?.map((el, index) => (
+                <div key={index}>
+                  <Link href={`/study/${el.owner}/${el.repo}/01:01`}>
+                    {`${el.repo}(${el.owner})`}
+                  </Link>
+                  <br />
+                </div>
+              ))}
+            <br />
+            <br />
+            <Link href={'/add-resource'}>
+              <Button variant="contained">Add resource</Button>
+            </Link>
           </div>
         </div>
       </div>

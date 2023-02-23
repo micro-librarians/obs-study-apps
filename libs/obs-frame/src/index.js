@@ -9,3 +9,4 @@ const mount = (el, { url }) => {
 export { mount }
 export * from './lib/obs-frame'
 export * from './lib/hooks'
+export * from './lib/navigation'

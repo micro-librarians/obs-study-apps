@@ -8,3 +8,4 @@ const mount = (el, { onLanguageSelect }) => {
 
 export { mount }
 export * from './lib/language-select'
+export * from './lib/resource-list'
