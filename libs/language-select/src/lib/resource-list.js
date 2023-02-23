@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react'
+
 import axios from 'axios'
 
-import { Button } from '@mui/material'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+
+import { Button } from '@mui/material'
 
 const uploadResource = (url) => {
   axios.get(url)

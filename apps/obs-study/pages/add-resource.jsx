@@ -1,8 +1,10 @@
-import { LanguageSelect } from 'language-select'
-import styled from '@emotion/styled'
-import useDownloadedResources from '../hooks/useDownloadedResources'
 import { useState } from 'react'
-import { ResourcesList } from 'language-select'
+
+import { LanguageSelect, ResourcesList } from 'language-select'
+
+import useDownloadedResources from '../hooks/useDownloadedResources'
+
+import styled from '@emotion/styled'
 
 const StyledPage = styled.div`
   .page {
