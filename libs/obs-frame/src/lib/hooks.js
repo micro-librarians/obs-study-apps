@@ -34,9 +34,9 @@ function useObs({ _url, _reference }) {
       const allStories = {}
       JSZipUtils.getBinaryContent(_url, function (err, data) {
         if (err) {
-          throw err;
+          throw err
         }
-        var zip = new jszip();
+        var zip = new jszip()
         zip.loadAsync(data).then(async function () {
           for (const key in zip.files) {
             if (Object.hasOwnProperty.call(zip.files, key)) {
@@ -49,8 +49,8 @@ function useObs({ _url, _reference }) {
             }
           }
           setObs(allStories)
-        });
-      });
+        })
+      })
     }
     if (_url.length > 0) {
       main()
@@ -58,31 +58,36 @@ function useObs({ _url, _reference }) {
   }, [_url])
 
   useEffect(() => {
-    setReference(_reference)
+    const [story, frame] = _reference.split(':')
+    setReference({
+      story: parseInt(story).toString().padStart(2, '0'),
+      frame: parseInt(frame).toString().padStart(2, '0'),
+    })
   }, [_reference])
 
   const goPrev = () => {
-    setReference(prev => {
+    setReference((prev) => {
       const { frame, story } = prev
       if (parseInt(frame) <= 1) {
-        if ((parseInt(story)) <= 1) {
+        if (parseInt(story) <= 1) {
           return { story: '01', frame: '01' }
         } else {
           const prevStory = (parseInt(story) - 1).toString().padStart(2, '0')
-          const lastFrame = Object.keys(obs[prevStory].frames).length.toString().padStart(2, '0')
+          const lastFrame = Object.keys(obs[prevStory].frames)
+            .length.toString()
+            .padStart(2, '0')
           return {
             story: prevStory,
-            frame: lastFrame
+            frame: lastFrame,
           }
         }
       } else {
         return {
           ...prev,
-          frame: (parseInt(prev.frame) - 1).toString().padStart(2, '0')
+          frame: (parseInt(prev.frame) - 1).toString().padStart(2, '0'),
         }
       }
-    }
-    )
+    })
   }
 
   const goNext = () => {
@@ -94,13 +99,18 @@ function useObs({ _url, _reference }) {
           frame: Object.keys(obs[story].frames)[
             Object.keys(obs[story].frames).length - 1
           ],
-        });
+        })
       } else {
-        setReference({ story: (parseInt(story) + 1).toString().padStart(2, '0'), frame: '01' });
+        setReference({
+          story: (parseInt(story) + 1).toString().padStart(2, '0'),
+          frame: '01',
+        })
       }
     } else {
-      setReference({ story, frame: (parseInt(frame) + 1).toString().padStart(2, '0') })
-
+      setReference({
+        story,
+        frame: (parseInt(frame) + 1).toString().padStart(2, '0'),
+      })
     }
   }
 
@@ -110,8 +120,8 @@ function useObs({ _url, _reference }) {
 
   return {
     state: { obs, reference },
-    actions: { goPrev, goNext, changeStory }
+    actions: { goPrev, goNext, changeStory },
   }
 }
 
-export default useObs;
+export default useObs

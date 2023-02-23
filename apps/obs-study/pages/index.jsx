@@ -18,7 +18,7 @@ export function Index() {
             <Link href={'/add-resource'}>Add new resource</Link>
             <br />
             <br />
-            <Link href={'/study/ru_gl/ru_obs/1:1'}>Go to Obs</Link>
+            <Link href={'/study/ru_gl/ru_obs/01:01'}>Go to Obs</Link>
           </div>
         </div>
       </div>
