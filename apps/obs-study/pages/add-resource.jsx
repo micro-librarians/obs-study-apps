@@ -5,6 +5,7 @@ import { LanguageSelect, ResourcesList } from 'language-select'
 import useDownloadedResources from '../hooks/useDownloadedResources'
 
 import styled from '@emotion/styled'
+import Link from 'next/link'
 
 const StyledPage = styled.div`
   .page {
@@ -25,6 +26,7 @@ export function AddResourcePage() {
               downloadedResources={downloadedResources ?? []}
               listOfResources={listOfResources}
             />
+            <Link href={'/load-resource'}>Load resource</Link>
           </div>
         </div>
       </div>
