@@ -4,7 +4,9 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        "name": "OBS Study App"
+      },
     },
     {
       name: '@electron-forge/maker-zip',

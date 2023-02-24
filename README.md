@@ -29,3 +29,6 @@ Package to stand-alone app (x64 example):
 yarn export:obs-study
 yarn package --arch=x64
 ```
+
+### Notes:
+- The file `.forgeignore` is intended to prevent files/folders from being included in the app package, but it does not seem to work so file size is currently bloated.  Looking for a solution. 
