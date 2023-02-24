@@ -1,21 +1,28 @@
-import { Button} from '@mui/material'
+import { Box, IconButton, Typography } from '@mui/material'
 import styles from './obs-frame.module.css'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 
-
-export function Navigation({ reference, goNext, goPrev }) {
-    return (
-      <div className={styles['navigation']}>
-        <Button variant={'contained'} onClick={goPrev}>
-          {'<-'}
-        </Button>
+export function Navigation({ reference, goNext, goPrev, sx }) {
+  return (
+    <div className={styles['navigation']}>
+      <Box
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      >
+        <IconButton variant={'contained'} onClick={goPrev}>
+          <ArrowBackIosNewIcon />
+        </IconButton>
         <div className={styles['navigation-reference']}>
-          OBS {reference?.story}:{reference.frame}
+          <Typography>
+            OBS {reference?.story}:{reference.frame}
+          </Typography>
         </div>
-        <Button variant={'contained'} onClick={goNext}>
-          {'->'}
-        </Button>
-      </div>
-    )
-  }
+        <IconButton variant={'contained'} onClick={goNext}>
+          <ArrowForwardIosIcon />
+        </IconButton>
+      </Box>
+    </div>
+  )
+}
 
 export default Navigation
