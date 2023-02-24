@@ -6,19 +6,18 @@
   "main": "./dist/apps/obs-study/exported/main.js",
   "scripts": {
     "glib:js": "nx g lib --publishable --buildable --js",
-    "export:obs-study": "nx export obs-study",
-    "dev": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn:electron\"",
-    "electron": "wait-on tcp:3000 && electron .",
+    "export:obs-study": "nx export obs-study && yarn clean-dist",
+    "start:obs-study": "yarn export:obs-study && yarn start",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "start:obs-study": "yarn export:obs-study && yarn start:electron",
-    "start:electron": "electron ./dist/apps/obs-study/exported"
+    "clean-dist": "node ./cleanDist.js"
   },
   "private": true,
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
     "@electron-forge/cli": "^6.0.5",
+    "@electron-forge/maker-dmg": "^6.0.5",
     "@electron-forge/maker-deb": "^6.0.5",
     "@electron-forge/maker-rpm": "^6.0.5",
     "@electron-forge/maker-squirrel": "^6.0.5",
@@ -47,8 +46,11 @@
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "babel-jest": "28.1.1",
+    "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3",
     "cypress": "^12.2.0",
     "electron": "^23.1.0",
+    "electron-squirrel-startup": "^1.0.0",
     "eslint": "~8.15.0",
     "eslint-config-next": "13.1.1",
     "eslint-config-prettier": "8.1.0",
@@ -57,15 +59,18 @@
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-react": "7.31.11",
     "eslint-plugin-react-hooks": "4.6.0",
+    "fs-extra": "^11.1.0",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "nx": "15.7.2",
+    "path-extra": "^4.3.0",
     "prettier": "^2.6.2",
     "react-test-renderer": "18.2.0",
     "swc-loader": "0.1.15",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
-    "typescript": "~4.8.2"
+    "typescript": "~4.8.2",
+    "wait-on": "^7.0.1"
   },
   "dependencies": {
     "@emotion/react": "11.10.5",
@@ -73,17 +78,13 @@
     "@emotion/styled": "11.10.5",
     "@mui/material": "^5.11.10",
     "axios": "^1.3.3",
-    "concurrently": "^7.6.0",
-    "cross-env": "^7.0.3",
     "electron-is-dev": "^2.0.0",
-    "electron-squirrel-startup": "^1.0.0",
     "jszip": "^3.10.1",
     "jszip-utils": "^0.1.0",
     "next": "13.1.1",
     "next-pwa": "^5.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tslib": "^2.3.0",
-    "wait-on": "^7.0.1"
+    "tslib": "^2.3.0"
   }
 }
