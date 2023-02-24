@@ -31,4 +31,8 @@ yarn package --arch=x64
 ```
 
 ### Notes:
-- The file `.forgeignore` is intended to prevent files/folders from being included in the app package, but it does not seem to work so file size is currently bloated.  Looking for a solution. 
+- The file `.forgeignore` is intended to prevent files/folders from being included in the app package, but it does not seem to work so file size is currently bloated.  Looking for a solution.
+- files to be excluded: 
+  - 145MB -> `./obs-study-apps.app/Contents/Resources/app/apps/obs-study/.next`
+  - and maybe: 
+    - 78M ->	`./obs-study-apps.app/Contents/Resources/app/node_modules/@next`
