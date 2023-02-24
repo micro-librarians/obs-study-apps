@@ -1,26 +1,30 @@
-import { useMemo } from 'react'
-import { Select, MenuItem } from '@mui/material'
+import { useEffect, useMemo, useState } from 'react'
+import { Select, MenuItem, Typography } from '@mui/material'
 import styles from './obs-frame.module.css'
 
 export function ObsFrame({ obs, reference, changeStory }) {
+  const [image, setImage] = useState('')
+
+  useEffect(() => {
+    if (reference) {
+      const imageUrl = `https://cdn.door43.org/obs/jpg/360px/obs-en-${reference.story}-${reference.frame}.jpg`
+      const imagePromise = obs[reference.story]?.images.get(imageUrl)
+      imagePromise?.then((img) => setImage(img))
+    }
+  }, [reference, image, obs])
 
   return (
     <div className={styles['container']}>
       {reference && obs && (
         <div>
-          <Title
+          <ObsTitle
             obs={obs}
             currentStory={reference.story}
             changeStory={changeStory}
             reference={reference}
           />
-          <img
-            src={`https://cdn.door43.org/obs/jpg/360px/obs-en-${reference.story}-${reference.frame}.jpg`}
-            style={{ maxWidth: '100%' }}
-            alt=""
-          />
+          <img src={image} style={{ maxWidth: '100%' }} alt="" />
           <p>{obs[reference.story].frames[reference.frame]}</p>
-
         </div>
       )}
     </div>
@@ -29,7 +33,7 @@ export function ObsFrame({ obs, reference, changeStory }) {
 
 export default ObsFrame
 
-function Title({ obs, currentStory, changeStory }) {
+function ObsTitle({ obs, currentStory, changeStory, sx }) {
   const storyTitles = useMemo(() => {
     const titles = []
 
@@ -50,14 +54,20 @@ function Title({ obs, currentStory, changeStory }) {
 
   return (
     <Select
+      sx={{ marginBottom: '1em', ...sx }}
+      SelectDisplayProps={{ style: { whiteSpace: 'normal' } }}
+      variant={'standard'}
       value={currentStory}
       label="Story"
       onChange={(e) => changeStory(e.target.value)}
       fullWidth
+      renderValue={(selected) => (
+        <Typography variant="h2" sx={{ fontSize: '1.5em', fontWeight: '500' }}>
+          {obs[selected].title}
+        </Typography>
+      )}
     >
       {storyTitles}
     </Select>
   )
 }
-
-
