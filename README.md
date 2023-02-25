@@ -30,9 +30,10 @@ yarn export:obs-study
 yarn package --arch=x64
 ```
 
+Make dmg install on MacOS (x64 example):
+```
+yarn package --arch=x64
+```
+
 ### Notes:
-- The file `.forgeignore` is intended to prevent files/folders from being included in the app package, but it does not seem to work so file size is currently bloated.  Looking for a solution.
-- files to be excluded: 
-  - 145MB -> `./obs-study-apps.app/Contents/Resources/app/apps/obs-study/.next`
-  - and maybe: 
-    - 78M ->	`./obs-study-apps.app/Contents/Resources/app/node_modules/@next`
+- The executable is still too large (about 450MB).  There are some node_modules that are probably not needed in the app to run.  More folders can be excluded by adding to the ignore list in `forge.config.js`
