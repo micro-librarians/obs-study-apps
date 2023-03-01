@@ -1,35 +1,43 @@
-import {useState} from 'react';
-import styled from '@emotion/styled';
-import { LanguageSelect } from 'language-select';
-import { ObsFrame } from 'obs-frame';
+import Link from 'next/link'
+
+import styled from '@emotion/styled'
+import { Button } from '@mui/material'
+
+import useDownloadedResources from '../hooks/useDownloadedResources'
 
 const StyledPage = styled.div`
   .page {
   }
-`;
-
+`
 export function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.@emotion/styled file.
-   */
-  const [url, setUrl] = useState('')
-  const parseSelectedLanguage = (langObject) => {
-    setUrl(langObject.zipball_url)
-  }
+  const {state: downloadedResources} = useDownloadedResources()
   return (
     <StyledPage>
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
-            <LanguageSelect selectedLanguage={parseSelectedLanguage} />
-            <ObsFrame url={url} />
+            Downloaded resources List
+            <br />
+            <br />
+            {downloadedResources &&
+              downloadedResources?.map((el, index) => (
+                <div key={index}>
+                  <Link href={`/study/${el.owner}/${el.repo}/01:01`}>
+                    {`${el.repo}(${el.owner})`}
+                  </Link>
+                  <br />
+                </div>
+              ))}
+            <br />
+            <br />
+            <Link href={'/add-resource'}>
+              <Button variant="contained">Add resource</Button>
+            </Link>
           </div>
         </div>
       </div>
     </StyledPage>
-  );
+  )
 }
 
-export default Index;
+export default Index

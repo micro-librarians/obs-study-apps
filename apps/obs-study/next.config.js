@@ -16,6 +16,14 @@ const withPWA = require('next-pwa')({
  * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = withPWA({
+  async rewrites() {
+    return [
+      {
+        source: '/jpg/:slug*',
+        destination: 'https://cdn.door43.org/obs/jpg/:slug*',
+      },
+    ]
+  },
   nx: {
     // Set this to true if you would like to to use SVGR
     // See: https://github.com/gregberge/svgr
